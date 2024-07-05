@@ -1,6 +1,10 @@
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/material.dart';
 
+// big thanks to youtube channel: Erico Darmawan Handoyo
+// indonesian channel that provide this simplest example
+// i only do some small changes and explanations
+
 void main() {
   runApp(const Aplikasi());
 }
@@ -13,9 +17,7 @@ class Aplikasi extends StatelessWidget {
     return MaterialApp(
       title: 'Tes Flutter',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primarySwatch: Colors
-              .blue), // bisa juga ThemeData(appBarTheme: AppBarTheme(backgroundColor: Colors.blue))
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const MainPage(),
     );
   }
@@ -41,7 +43,6 @@ class _MainPageState extends State<MainPage> {
 
   getDevices() async {
     devices = await printer.getBondedDevices();
-    print(devices.map((e) => e.address));
     setState(() {});
   }
 
@@ -52,6 +53,8 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const Text(
+                'all devices that shown here\nmust be paired before, in your phone.\nopen your bluetooth setting and pair\nyour bluetooth printer first'),
             DropdownButton(
               value: selectedDevice,
               hint: const Text('Selecet Thermal Printer'),
@@ -96,14 +99,14 @@ class _MainPageState extends State<MainPage> {
                   // 0: left
                   // 1: center
                   // 2: right
-                  printer.printCustom('coba-coba', 0, 0);
-                  printer.printCustom('coba-coba', 1, 1);
-                  printer.printCustom('coba-coba', 2, 2);
-                  printer.printCustom('coba-coba', 3, 1);
+                  printer.printCustom('go test this', 0, 0);
+                  printer.printCustom('go test this', 1, 1);
+                  printer.printCustom('go test this', 2, 2);
+                  printer.printCustom('go test this', 3, 1);
                   printer.printQRcode('yuuuhoooo', 350, 350, 1);
                   printer.printNewLine();
                   printer.printNewLine();
-                  printer.disconnect();
+                  printer.disconnect(); // avoiding device overheat
                 }
               },
               child: const Text('print'),
